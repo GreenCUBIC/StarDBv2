@@ -3,22 +3,34 @@
 #
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
-version: '3.0'
 services:
-#  server:
-#    build: .
-#    ports:
-#      - "8082:3000"
-#    networks:
-#      - stardb-net
-#    env_file:
-#      - .env
-#    volumes:
-#      - ./data:/app/data # this allows the data to persist
-#    environment:
-#      POSTGRES_HOST: database
-#    depends_on:
-#      - database
+
+  stardb-server:
+    build: .
+    ports:
+      - "5173:5173"
+      - "3000:3000"
+    expose:
+      - 5173
+      - 3000
+    environment:
+      VIRTUAL_HOST: "stardb.cu-bic.ca"
+      LETSENCRYPT_HOST: "stardb.cu-bic.ca"
+      VIRTUAL_PORT: 3000
+
+      DB_USER: stardb_admin
+      DB_PASSWORD: astroglia
+      DB_PORT: 5556
+      DB_HOST: stardb2-database-1
+
+      GENE_NAME_TO_ENSEMBL_ID_MAP: data/development/inverse_genes_dict.json
+      GENE_EXPRESSION_SERIES_MALE: data/development/male_data.json
+      GENE_EXPRESSION_SERIES_FEMALE: data/development/female_data.json
+    networks:
+      - stardb-net
+      - webservices
+    depends_on:
+      - database
 
   database:
     image: postgres:13
@@ -44,4 +56,5 @@ volumes:
     driver: local
 
 networks:
+  webservices:
   stardb-net:
