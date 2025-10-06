@@ -1,0 +1,47 @@
+
+# Copyright (c) 2025, Carleton University Biomedical Informatics Collaboratory
+#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+version: '3.0'
+services:
+#  server:
+#    build: .
+#    ports:
+#      - "8082:3000"
+#    networks:
+#      - stardb-net
+#    env_file:
+#      - .env
+#    volumes:
+#      - ./data:/app/data # this allows the data to persist
+#    environment:
+#      POSTGRES_HOST: database
+#    depends_on:
+#      - database
+
+  database:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_USER: stardb_admin
+      POSTGRES_PASSWORD: astroglia
+      POSTGRES_DB: stardb_admin
+    volumes:
+      - ./database:/var/lib/postgresql/data # this allows the data to persist
+      - ./shared:/app/shared # this allows the data to persist
+      - ./data:/app/data # this allows the data to persist
+    expose:
+      - "5556"
+    ports:
+      - "5556:5556"
+    command: -p 5556
+    networks:
+      - stardb-net
+
+volumes:
+  dev_database:
+    driver: local
+
+networks:
+  stardb-net:
