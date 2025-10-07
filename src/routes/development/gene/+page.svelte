@@ -277,11 +277,7 @@
 </div>
 <div class="flex flex-row justify-center mt-[20px]">
   <a href={`/development/download?gene=${selected.join(",")}`} download>
-    <button
-      disabled={selected.length === 0}
-      class={`w-[200px] ${selected.length === 0 ? "bg-gray-500 opacity-40" : "bg-blue-500 hover:bg-blue-700"} text-white font-bold py-2 px-4 rounded mx-auto`}
-      onclick={downloadCsv}
-    >
+    <button disabled={selected.length === 0} class={`w-[200px] ${selected.length === 0 ? "bg-gray-500 opacity-40" : "bg-blue-500 hover:bg-blue-700"} text-white font-bold py-2 px-4 rounded mx-auto`}>
       Download as CSV
     </button>
   </a>

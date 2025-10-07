@@ -112,11 +112,7 @@
 
 <div class="flex flex-row justify-center">
   <a href={`/estrous-cycle/gene/download?query=${selected.join(",")}`} download>
-    <button
-      disabled={selected.length === 0}
-      class={`w-[200px] ${selected.length === 0 ? "bg-gray-500 opacity-40" : "bg-blue-500 hover:bg-blue-700"} text-white font-bold py-2 px-4 rounded mx-auto`}
-      onclick={downloadCsv}
-    >
+    <button disabled={selected.length === 0} class={`w-[200px] ${selected.length === 0 ? "bg-gray-500 opacity-40" : "bg-blue-500 hover:bg-blue-700"} text-white font-bold py-2 px-4 rounded mx-auto`}>
       Download as CSV
     </button>
   </a>

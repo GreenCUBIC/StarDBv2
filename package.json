@@ -21,6 +21,7 @@
 		"vite": "^7.0.4"
 	},
 	"dependencies": {
+		"@sveltejs/adapter-node": "^5.3.3",
 		"@tailwindcss/postcss": "^4.1.13",
 		"@tailwindcss/vite": "^4.1.13",
 		"@types/d3-array": "^3.2.2",
