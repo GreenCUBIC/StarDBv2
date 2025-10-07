@@ -7,7 +7,7 @@ warnings.filterwarnings("ignore")
 
 import pandas as pd
 
-from db_connection import get_db_connection
+from stardb2.db import get_db_connection
 
 engine = get_db_connection("development")
 df = pd.read_sql(

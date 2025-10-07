@@ -16,9 +16,9 @@
   </p>
 
   <p class="text-center">
-    <a href="/developmental/gene">Query by gene(s)</a>
+    <a href="/development/gene">Query by gene(s)</a>
     <br />
-    <a href="/developmental/goterm">Query by GO term</a>
+    <a href="/development/goterm">Query by GO term</a>
   </p>
 </div>
 
@@ -36,7 +36,7 @@
 </div>
 
 <p class="text-center">
-  <a class="text-center" href="/gonadal">Query by gene(s)</a>
+  <a class="text-center" href="/estrous-cycle">Query by gene(s)</a>
 </p>
 
 <style>

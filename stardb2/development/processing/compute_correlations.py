@@ -11,7 +11,7 @@ import numpy
 
 dotenv.load_dotenv()
 
-from db_connection import get_db_connection
+from stardb2.db import get_db_connection
 
 engine = get_db_connection("development")
 genes_df = pd.read_sql(
@@ -19,10 +19,10 @@ genes_df = pd.read_sql(
 """,
     con=engine,
 )
-male_data = json.load(open(os.getenv('GENE_EXPRESSION_SERIES_MALE')))
-female_data = json.load(open(os.getenv('GENE_EXPRESSION_SERIES_FEMALE')))
+male_data = json.load(open(os.getenv('GENE_TRANSLATION_SERIES_MALE')))
+female_data = json.load(open(os.getenv('GENE_TRANSLATION_SERIES_FEMALE')))
 
-genes_dict = { x['ensembl_id']: x['gene_name'] for i, x in genes_df.iterrows() }
+gene_id_to_name = { x['ensembl_id']: x['gene_name'] for i, x in genes_df.iterrows() }
 
 def run(target_gene):
     
@@ -56,26 +56,23 @@ def run(target_gene):
         correlations['female'] = correlations['female'][:args['top']]
         correlations['both'] = correlations['both'][:args['top']]
         
-    correlations['male'] = [{'ensembl_id': x[0], 'gene_name': genes_dict[x[0]], 'correlation': x[1] } for x in correlations['male']]
-    correlations['female'] = [{'ensembl_id': x[0], 'gene_name': genes_dict[x[0]], 'correlation': x[1] } for x in correlations['female']]
-    correlations['both'] = [{'ensembl_id': x[0], 'gene_name': genes_dict[x[0]], 'correlation': x[1] } for x in correlations['both']]
+    correlations['male'] = [{'ensembl_id': x[0], 'gene_name': gene_id_to_name[x[0]], 'correlation': x[1] } for x in correlations['male']]
+    correlations['female'] = [{'ensembl_id': x[0], 'gene_name': gene_id_to_name[x[0]], 'correlation': x[1] } for x in correlations['female']]
+    correlations['both'] = [{'ensembl_id': x[0], 'gene_name': gene_id_to_name[x[0]], 'correlation': x[1] } for x in correlations['both']]
         
     if args['output']:
-        open(f"{args['output']}/{genes_dict[target_gene]}.json", 'w').write(json.dumps(correlations, indent=2))
+        open(f"{args['output']}/{gene_id_to_name[target_gene]}.json", 'w').write(json.dumps(correlations, indent=2))
 
 def main(args):
-    jobs = genes_dict.keys()
+    jobs = gene_id_to_name.keys()
     
-            
     with mp.Pool(15) as pool:
       r = list(tqdm.tqdm(pool.imap(run, jobs), total=len(jobs)))
-    #print(json.dumps(correlations, indent=2))
     
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-i', '--ensembl_id', type=str, required=True, help='Ensembl ID of the gene for which correlations are to be retrieved.')
-    parser.add_argument('-t', '--top', type=int, required=False, help='Number of most correlated genes to return.')
-    parser.add_argument('-o', '--output', type=str, required=False, help='output file.')
+    parser.add_argument('-t', '--top', type=int, required=True, help='Number of most correlated genes to return.')
+    parser.add_argument('-o', '--output', type=str, required=False, help='Output directory.')
     args = vars(parser.parse_args())
     
 

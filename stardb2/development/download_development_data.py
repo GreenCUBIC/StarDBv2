@@ -9,7 +9,7 @@ warnings.filterwarnings("ignore")
 import pandas as pd
 import dotenv
 
-from db_connection import get_db_connection
+from stardb2.db import get_db_connection
 
 dotenv.load_dotenv()
 
@@ -32,4 +32,3 @@ df = pd.read_sql(
 df['age'] = df['age'].apply(lambda x: x if x != 100 else 'adult')
 
 print(df[['ensembl_id', 'gene_name', 'sex', 'age', 'rpkm']].to_csv(index=False))
-
