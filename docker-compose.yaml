@@ -7,6 +7,7 @@ services:
 
   stardb-server:
     build: .
+    container_name: stardb2-server
     ports:
       - "3000:3000"
     expose:
@@ -19,11 +20,16 @@ services:
       DB_USER: stardb_admin
       DB_PASSWORD: astroglia
       DB_PORT: 5556
-      DB_HOST: stardb2-database-1
+      DB_HOST: stardb2-database
 
-      GENE_NAME_TO_ENSEMBL_ID_MAP: data/development/inverse_genes_dict.json
-      GENE_EXPRESSION_SERIES_MALE: data/development/male_data.json
-      GENE_EXPRESSION_SERIES_FEMALE: data/development/female_data.json
+      ENSEMBL_ID_TO_GENE_NAME_MAP: data/development/gene_id_to_name.json
+      GENE_NAME_TO_ENSEMBL_ID_MAP: data/development/gene_name_to_id.json
+      GENE_TRANSLATION_SERIES_MALE: data/development/male_data.json
+      GENE_TRANSLATION_SERIES_FEMALE: data/development/female_data.json
+
+      ENSEMBL_ID_TO_GENE_NAME_MAP_ESTROUS: data/estrous_cycle/gene_id_to_name.json
+      GENE_NAME_TO_ENSEMBL_ID_MAP_ESTROUS: data/estrous_cycle/gene_name_to_id.json
+
     networks:
       - stardb-net
       - webservices
@@ -32,6 +38,7 @@ services:
 
   database:
     image: postgres:13
+    container_name: stardb2-database
     restart: always
     environment:
       POSTGRES_USER: stardb_admin

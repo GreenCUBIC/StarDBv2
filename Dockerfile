@@ -11,4 +11,4 @@ RUN env/bin/pip install -r requirements.txt
 RUN npm install --legacy-peer-deps
 RUN npm run build
 
-CMD ["sh", "-c", "PROTOCOL_HEADER=x-forwarded-proto HOST_HEADER=x-forwarded-host node build"]
+CMD ["sh", "-c", "ORIGIN=https://stardb.cu-bic.ca node build"]
