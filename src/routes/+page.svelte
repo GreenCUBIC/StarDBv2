@@ -22,7 +22,7 @@
   </p>
 </div>
 
-<h2> Translatome plasticity of neocortical astroglia throughout the estrous cycle (2022) </h2>
+<h2> Translatome plasticity of neocortical astroglia throughout the estrous cycle (2025) </h2>
 <div class="m-[20px]">
   <b>Authors:</b>
   Gareth M. Rurak, Chase Groulx, Ashley McFee, Argel Aguilar-Valles, François Charih, James R. Green, Barbara Woodside, Gianfilippo Coppola, Natalina Salmaso

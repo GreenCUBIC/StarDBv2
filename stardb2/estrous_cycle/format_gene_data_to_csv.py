@@ -20,7 +20,7 @@ if args['id']:
 else: 
     genes = args['name']
     
-gene_array = f"ARRAY[{','.join([f"'{g}'" for g in genes])}]"
+gene_array = "ARRAY[" + ','.join([f"'{g}'" for g in genes]) + "]"
 
 query = f"""
 SELECT gene_name, ensembl_id, stage, rpkm
