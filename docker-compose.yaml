@@ -8,10 +8,8 @@ services:
   stardb-server:
     build: .
     ports:
-      - "5173:5173"
       - "3000:3000"
     expose:
-      - 5173
       - 3000
     environment:
       VIRTUAL_HOST: "stardb.cu-bic.ca"
@@ -57,4 +55,5 @@ volumes:
 
 networks:
   webservices:
+    external: true
   stardb-net:

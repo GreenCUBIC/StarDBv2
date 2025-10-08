@@ -1,5 +1,5 @@
 import { Client, Pool } from "pg";
-import { DB_USER, DB_HOST, DB_PASSWORD, DB_PORT } from "$env/static/private";
+import { DB_USER, DB_HOST, DB_PASSWORD, DB_PORT } from "$env/dynamic/private";
 
 const developmentDbPool = new Pool({
   user: DB_USER,
