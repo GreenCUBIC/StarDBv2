@@ -17,7 +17,7 @@
   };
 
   const getGene = async (geneName) => {
-    const res = await fetch(`/development/gene/data?gene=${geneName}`);
+    const res = await fetch(`/development/gene/query?gene=${geneName}`);
     const data = (await res.json()).measurements;
     geneData = {
       ...geneData,

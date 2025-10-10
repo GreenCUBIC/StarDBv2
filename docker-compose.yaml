@@ -9,9 +9,9 @@ services:
     build: .
     container_name: stardb2-server
     ports:
-      - "3000:3000"
+      - "3001:3000"
     expose:
-      - 3000
+      - 3001
     environment:
       VIRTUAL_HOST: "stardb.cu-bic.ca"
       LETSENCRYPT_HOST: "stardb.cu-bic.ca"
